@@ -1,0 +1,92 @@
+<div class="grid">
+    <div class="col-12 lg:col-12 xl:col-12">
+        <div class="card mb-0">
+            <h3 style="margin: 0;">Contatos</h3>
+        </div>
+    </div>
+
+    <div class="col-12 lg:col-4 xl:col-4">
+        <div class="card mb-0">
+            <div class="total text-center">
+                <div>{{total}}</div>
+            </div>
+            <div class="border-totalizador">
+            </div>
+            <div class="text-center total-descricao">
+                <div>Total</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 lg:col-4 xl:col-4">
+        <div class="card ativo mb-0">
+            <div class="total text-center">
+                <div>{{totalAtivos}}</div>
+            </div>
+            <div class="border-totalizador">
+            </div>
+            <div class="text-center total-descricao">
+                <div>Ativo</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 lg:col-4 xl:col-4">
+        <div class="card inativo mb-0">
+            <div class="total text-center">
+                <div>{{totalInativos}}</div>
+            </div>
+            <div class="border-totalizador">
+            </div>
+            <div class="text-center total-descricao">
+                <div>Inativo</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 lg:col-12 xl:col-12">
+        <div class="card mb-0">
+            <p-table [value]="contatos" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+                [tableStyle]="{ 'min-width': '50rem' }"
+                currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} registros"
+                [rowsPerPageOptions]="[5, 10, 20]">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="id" style="width:25%">ID<p-sortIcon field="id"></p-sortIcon></th>
+                        <th pSortableColumn="dsContato" style="width:25%">Nome<p-sortIcon
+                                field="dsContato"></p-sortIcon></th>
+                        <th pSortableColumn="nrCelular" style="width:25%">Celular<p-sortIcon
+                                field="nrCelular"></p-sortIcon></th>
+                        <th pSortableColumn="dsEmail" style="width:25%">Email<p-sortIcon field="dsEmail"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="stAtivo" style="width:25%">Status<p-sortIcon field="stAtivo"></p-sortIcon>
+                        </th>
+                        <th></th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-customer>
+                    <tr>
+                        <td>{{ customer.id }}</td>
+                        <td>{{ customer.dsContato }}</td>
+                        <td>{{ customer.nrCelular }}</td>
+                        <td>{{ customer.dsEmail }}</td>
+                        <td>
+                            <div
+                                [ngClass]="{'coluna-ativo': customer.stAtivo == 1, 'coluna-inativo': !customer.stAtivo}">
+                                {{
+                                customer.stAtivo ? 'ATIVO' : 'INATIVO' }}</div>
+                        </td>
+                        <td><button><i class="pi pi-bars"></i></button></td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="paginatorleft">
+                    <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+                </ng-template>
+                <ng-template pTemplate="paginatorright">
+                    <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+</div>
+
+<cadastro-contato *ngIf="exibirCadastroContatos"></cadastro-contato>
+<filtro-contatos  *ngIf="exibirFiltroContatos"></filtro-contatos>
