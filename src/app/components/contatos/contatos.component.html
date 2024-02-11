@@ -73,21 +73,21 @@
                         <th></th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-customer>
+                <ng-template pTemplate="body" let-contato>
                     <tr>
-                        <td>{{ customer.id }}</td>
-                        <td>{{ customer.dsContato }}</td>
-                        <td>{{ customer.nrCelular }}</td>
-                        <td>{{ customer.dsEmail }}</td>
+                        <td>{{ contato.id }}</td>
+                        <td>{{ contato.dsContato }}</td>
+                        <td>{{ contato.nrCelular }}</td>
+                        <td>{{ contato.dsEmail }}</td>
                         <td>
                             <div
-                                [ngClass]="{'coluna-ativo': customer.stAtivo == 1, 'coluna-inativo': !customer.stAtivo}">
+                                [ngClass]="{'coluna-ativo': contato.stAtivo == 1, 'coluna-inativo': !contato.stAtivo}">
                                 {{
-                                customer.stAtivo ? 'ATIVO' : 'INATIVO' }}</div>
+                                contato.stAtivo ? 'ATIVO' : 'INATIVO' }}</div>
                         </td>
                         <td>
                             <p-button tooltipPosition="left" pTooltip="Editar Contato" size="small" icon="pi pi-bars"
-                                [raised]="true" (click)="novoContato()"></p-button>
+                                [raised]="true" (click)="editar(contato)"></p-button>
                         </td>
                     </tr>
                 </ng-template>
@@ -103,7 +103,7 @@
 
 </div>
 
-<cadastro-contato *ngIf="exibirCadastroContatos" (cadastroConcluido)="exibirCadastroContatos = false; obterContatos()"
+<cadastro-contato *ngIf="exibirCadastroContatos" [contato]="contatoEdicao" (cadastroConcluido)="concluiuCadastro()"
     (close)="exibirCadastroContatos = false"></cadastro-contato>
 <filtro-contatos *ngIf="exibirFiltroContatos"></filtro-contatos>
 

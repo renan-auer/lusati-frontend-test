@@ -11,6 +11,8 @@ export class ContatosComponent implements OnInit {
 
     constructor(private contatoService: ContatoService, private messageService: MessageService) { }
 
+    contatoEdicao: Contato
+
     contatos: Contato[] = []
 
     totalAtivos: number = 0
@@ -21,6 +23,18 @@ export class ContatosComponent implements OnInit {
     exibirCadastroContatos = false
 
     ngOnInit() {
+        this.obterContatos()
+    }
+
+
+    editar(contato: Contato) {
+        this.contatoEdicao = contato
+        this.exibirCadastroContatos = true
+    }
+
+    concluiuCadastro() {
+        this.contatoEdicao = null
+        this.exibirCadastroContatos = false
         this.obterContatos()
     }
 

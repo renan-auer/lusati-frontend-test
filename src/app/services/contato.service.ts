@@ -12,7 +12,15 @@ export class ContatoService {
         return this.http.get<Contato[]>(`${environment.API_URL}/contact`)
     }
 
-    salvarContatos(body) {
+    getContatosPorId(id: number) {
+        return this.http.get<Contato>(`${environment.API_URL}/contact/${id}`)
+    }
+
+    salvarContato(body) {
         return this.http.post(`${environment.API_URL}/contact`, body)
+    }
+
+    alterarContato(id, body) {
+        return this.http.put(`${environment.API_URL}/contact/${id}`, body)
     }
 }
