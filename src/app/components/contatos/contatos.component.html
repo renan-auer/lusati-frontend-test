@@ -1,12 +1,24 @@
 <div class="grid">
     <div class="col-12 lg:col-12 xl:col-12">
         <div class="card mb-0">
-            <h3 style="margin: 0;">Contatos</h3>
+            <div class="grid">
+                <div class="col-4">
+                    <h3 style="margin: 0;">Contatos</h3>
+                </div>
+                <div class="col-8 flex justify-content-end" style="gap: 10px;">
+                    <p-button icon="pi pi-filter" severity="success" tooltipPosition="left" pTooltip="Filtrar"
+                        [raised]="true" (click)="novoContato()"></p-button>
+                    <p-button icon="pi pi-plus" tooltipPosition="left" pTooltip="Novo Contato" [raised]="true"
+                        (click)="novoContato()"></p-button>
+
+                </div>
+            </div>
+
         </div>
     </div>
 
     <div class="col-12 lg:col-4 xl:col-4">
-        <div class="card mb-0">
+        <div class="card card-total mb-0">
             <div class="total text-center">
                 <div>{{total}}</div>
             </div>
@@ -18,7 +30,7 @@
         </div>
     </div>
     <div class="col-12 lg:col-4 xl:col-4">
-        <div class="card ativo mb-0">
+        <div class="card card-ativo mb-0">
             <div class="total text-center">
                 <div>{{totalAtivos}}</div>
             </div>
@@ -30,7 +42,7 @@
         </div>
     </div>
     <div class="col-12 lg:col-4 xl:col-4">
-        <div class="card inativo mb-0">
+        <div class="card card-inativo mb-0">
             <div class="total text-center">
                 <div>{{totalInativos}}</div>
             </div>
@@ -44,7 +56,7 @@
     <div class="col-12 lg:col-12 xl:col-12">
         <div class="card mb-0">
             <p-table [value]="contatos" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
-                [tableStyle]="{ 'min-width': '50rem' }"
+                styleClass="p-datatable-striped" [tableStyle]="{ 'min-width': '50rem' }"
                 currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} registros"
                 [rowsPerPageOptions]="[5, 10, 20]">
                 <ng-template pTemplate="header">
@@ -73,7 +85,10 @@
                                 {{
                                 customer.stAtivo ? 'ATIVO' : 'INATIVO' }}</div>
                         </td>
-                        <td><button><i class="pi pi-bars"></i></button></td>
+                        <td>
+                            <p-button tooltipPosition="left" pTooltip="Editar Contato" size="small" icon="pi pi-bars"
+                                [raised]="true" (click)="novoContato()"></p-button>
+                        </td>
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="paginatorleft">
@@ -88,5 +103,8 @@
 
 </div>
 
-<cadastro-contato *ngIf="exibirCadastroContatos"></cadastro-contato>
-<filtro-contatos  *ngIf="exibirFiltroContatos"></filtro-contatos>
+<cadastro-contato *ngIf="exibirCadastroContatos" (cadastroConcluido)="exibirCadastroContatos = false; obterContatos()"
+    (close)="exibirCadastroContatos = false"></cadastro-contato>
+<filtro-contatos *ngIf="exibirFiltroContatos"></filtro-contatos>
+
+<p-toast></p-toast>

@@ -37,6 +37,6 @@ import { AppMenuitemComponent } from './app.menuitem.component';
         RippleModule,
         RouterModule,
     ],
-    exports: [AppLayoutComponent]
+    exports: [AppLayoutComponent],
 })
 export class AppLayoutModule { }

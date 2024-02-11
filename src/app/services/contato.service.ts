@@ -11,4 +11,8 @@ export class ContatoService {
     getContatos() {
         return this.http.get<Contato[]>(`${environment.API_URL}/contact`)
     }
+
+    salvarContatos(body) {
+        return this.http.post(`${environment.API_URL}/contact`, body)
+    }
 }

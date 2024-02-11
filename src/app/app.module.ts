@@ -5,13 +5,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { ContatoService } from './services/contato.service';
+import { GrupoService } from './services/grupo.service';
 
 @NgModule({
     declarations: [AppComponent, NotfoundComponent],
     imports: [AppRoutingModule, AppLayoutModule],
     providers: [
         { provide: LocationStrategy, useClass: PathLocationStrategy },
-        ContatoService
+        ContatoService,
+        GrupoService
     ],
     bootstrap: [AppComponent],
 })
