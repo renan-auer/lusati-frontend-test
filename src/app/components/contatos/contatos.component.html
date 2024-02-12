@@ -7,7 +7,7 @@
                 </div>
                 <div class="col-8 flex justify-content-end" style="gap: 10px;">
                     <p-button icon="pi pi-filter" severity="success" tooltipPosition="left" pTooltip="Filtrar"
-                        [raised]="true" (click)="novoContato()"></p-button>
+                        [raised]="true" (click)="abrirModalFiltro()"></p-button>
                     <p-button icon="pi pi-plus" tooltipPosition="left" pTooltip="Novo Contato" [raised]="true"
                         (click)="novoContato()"></p-button>
 
@@ -55,7 +55,7 @@
     </div>
     <div class="col-12 lg:col-12 xl:col-12">
         <div class="card mb-0">
-            <p-table [value]="contatos" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
+            <p-table [value]="contatosFiltrados" [paginator]="true" [rows]="5" [showCurrentPageReport]="true"
                 styleClass="p-datatable-striped" [tableStyle]="{ 'min-width': '50rem' }"
                 currentPageReportTemplate="Exibindo {first} a {last} de {totalRecords} registros"
                 [rowsPerPageOptions]="[5, 10, 20]">
@@ -105,6 +105,6 @@
 
 <cadastro-contato *ngIf="exibirCadastroContatos" [contato]="contatoEdicao" (cadastroConcluido)="concluiuCadastro()"
     (close)="exibirCadastroContatos = false"></cadastro-contato>
-<filtro-contatos *ngIf="exibirFiltroContatos"></filtro-contatos>
+<filtro-contatos *ngIf="exibirFiltroContatos" [filtro]="filtro" (filtrar)="filtro = $event; filtrar()"></filtro-contatos>
 
 <p-toast></p-toast>

@@ -14,6 +14,8 @@ import { PickListModule } from 'primeng/picklist';
 import { MessageService } from 'primeng/api';
 import { FormsModule } from '@angular/forms';
 import { ToastModule } from 'primeng/toast';
+import { FIltroContatosComponent } from './filtro-contatos/filtro-contatos.component';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
     imports: [
@@ -24,13 +26,14 @@ import { ToastModule } from 'primeng/toast';
         InputSwitchModule,
         TabViewModule,
         FormsModule,
+        DropdownModule,
         ToastModule,
         ButtonModule,
         DialogModule,
         PickListModule,
         ContatosRoutingModule
     ],
-    declarations: [ContatosComponent, CadastroContatosComponent],
+    declarations: [ContatosComponent, CadastroContatosComponent, FIltroContatosComponent],
     providers: [MessageService]
 })
 export class ContatosModule { }

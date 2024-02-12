@@ -35,6 +35,7 @@ export class CadastroContatosComponent implements OnInit {
     dsEmail
 
     ngOnInit() {
+
         if (this.contato) {
             //EM CASO DE EDIÇÃO BUSCA O CONTATO COMPLETO COM SEUS GRUPOS
             this.contatoService.getContatosPorId(this.contato.id).subscribe({

@@ -14,6 +14,7 @@ export class ContatosComponent implements OnInit {
     contatoEdicao: Contato
 
     contatos: Contato[] = []
+    contatosFiltrados: Contato[] = []
 
     totalAtivos: number = 0
     totalInativos: number = 0
@@ -21,6 +22,8 @@ export class ContatosComponent implements OnInit {
 
     exibirFiltroContatos = false
     exibirCadastroContatos = false
+
+    filtro
 
     ngOnInit() {
         this.obterContatos()
@@ -41,6 +44,7 @@ export class ContatosComponent implements OnInit {
     obterContatos() {
         this.contatoService.getContatos().subscribe(contatos => {
             this.contatos = contatos
+            this.filtrar()
             this.total = this.contatos.length
             this.totalAtivos = this.contatos.filter(c => c.stAtivo == 1).length
             this.totalInativos = this.contatos.filter(c => !c.stAtivo).length
@@ -49,5 +53,28 @@ export class ContatosComponent implements OnInit {
 
     novoContato() {
         this.exibirCadastroContatos = true;
+    }
+
+    abrirModalFiltro() {
+        this.exibirFiltroContatos = true;
+    }
+    
+    filtrar() {
+        this.contatosFiltrados = this.contatos.filter(contato => {
+            let correspondeFiltro = true
+
+            if(this.filtro?.status) {
+                correspondeFiltro = contato.stAtivo == (this.filtro.status == 'Ativo' ? 1 : 0)
+            }
+
+            if(correspondeFiltro && this.filtro?.textoBusca) {
+                correspondeFiltro = contato.dsContato?.toUpperCase().includes(this.filtro.textoBusca?.toUpperCase()) || 
+                contato.dsEmail?.toUpperCase().includes(this.filtro.textoBusca?.toUpperCase()) || 
+                contato.nrCelular?.toUpperCase().includes(this.filtro.textoBusca?.toUpperCase()) 
+            }
+
+            return correspondeFiltro
+        })
+        this.exibirFiltroContatos = false
     }
 }

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ContatoService } from 'src/app/services/contato.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
     selector: 'filtro-contatos',
@@ -8,9 +7,32 @@ import { ContatoService } from 'src/app/services/contato.service';
 })
 export class FIltroContatosComponent implements OnInit {
 
-    constructor(private contatoService: ContatoService) {}
 
+    constructor(
+    ) { }
+
+    @Input() filtro 
+    @Output() filtrar = new EventEmitter()
+
+    status
+    textoBusca
 
     ngOnInit() {
+        this.status = this.filtro?.status
+        this.textoBusca = this.filtro?.textoBusca
     }
+
+    removerFiltros() {
+        this.status = null
+        this.textoBusca = null
+        this.filtrarContatos()
+    }
+
+    filtrarContatos() {
+        this.filtrar.emit({
+            status: this.status,
+            textoBusca: this.textoBusca
+        })
+    }
+
 }
