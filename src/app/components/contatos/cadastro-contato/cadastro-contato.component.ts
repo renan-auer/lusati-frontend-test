@@ -61,7 +61,7 @@ export class CadastroContatosComponent implements OnInit {
 
     obterGrupos() {
         this.grupoService.getGrupos().subscribe(data => {
-            this.listaOrigem = data
+            this.listaOrigem = data.filter(d => d.stAtivo == 1)
             if (this.contato) {
                 // EM CASO DE EDIÇÃO REMOVE OS ITENS DA LISTA DE ORIGEM
                 this.contato.grupos.forEach(g => {
